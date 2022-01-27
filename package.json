@@ -1,0 +1,19 @@
+{
+  "name": "sql_assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "create-database": "sh ./setup.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zilahir/R0279-3003.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zilahir/R0279-3003/issues"
+  },
+  "homepage": "https://github.com/zilahir/R0279-3003#readme"
+}

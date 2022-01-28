@@ -1,5 +1,3 @@
-import { globby } from 'globby';
-import path from 'path';
 import { readFileSync } from 'fs';
 import { MySql } from './mysql.js';
 
@@ -26,7 +24,6 @@ async function insertRandomData(dbTables) {
                             }
                         )
                     }
-                    // console.log(jsonObject[dataKey])
                 } catch (e) {
                     console.error(e)
                     reject(e)

@@ -42,7 +42,7 @@ const tables = {
         { name: 'from_data', randomFunction: faker.date.past },
         { name: 'to_date', randomFunction: faker.date.future },
     ]
-}
+};
 
 /* export const objectSchemas = {
     'employees': Object.assign({}, ...tables.employees.map(field => ({
@@ -68,7 +68,7 @@ function generateRandomData() {
         Object.keys(tables).map(key => {
             const thisKey = tables[key]
             let randomData = []
-            // console.log('thisKey', thisKey);
+
             if (Array.isArray(thisKey)) {
                 Array.from({ length: randomNumber }).fill().map((_, index) => {
                     let thisRandomObject = {}
@@ -80,7 +80,7 @@ function generateRandomData() {
             }
             writeJsonFiles(randomData, key);
         })
-        resolve(true)
+        resolve(true);
     })
 }
 

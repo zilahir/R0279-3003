@@ -11,8 +11,8 @@ const getFutureDate = () => new Date(faker.date.future()).getTime()
 const tables = {
     employees: [
         { name: 'emp_no', randomFunction: undefined },
-        { name: 'birth_data', randomFunction: getPastDate },
-        { name: 'fist_name', randomFunction: faker.name.firstName },
+        { name: 'birth_date', randomFunction: getPastDate },
+        { name: 'first_name', randomFunction: faker.name.firstName },
         { name: 'last_name', randomFunction: faker.name.lastName },
         { name: 'gender', randomFunction: faker.name.gender },
         { name: 'hire_date', randomFunction: getPastDate },
@@ -83,7 +83,7 @@ function generateRandomData() {
             }
             writeJsonFiles(randomData, key);
         })
-        resolve(true);
+        resolve(Object.keys(tables).map(col => col));
     })
 }
 

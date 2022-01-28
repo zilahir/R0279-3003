@@ -22,14 +22,22 @@ export class MySql {
         return Object.keys(data).map((field) => `'${data[field]}'`).join(', ');
     }
 
+    cloeConnection() {
+        return this.connection.destroy()
+    }
+
     insertIntoDatabase(tableName, data) {
         const normalizedSqlQuery = `INSERT INTO ${tableName} (${this.getColumnNamesFromData(data)}) VALUES (${this.getColumnData(data)});`;
         // console.log(normalizedSqlQuery);
-        this.connection.query(normalizedSqlQuery, (err, result) => {
-            if (err) {
-                throw err
-            }
-            console.log('record inserted');
+        return new Promise((resolve, reject) => {
+            this.connection.query(normalizedSqlQuery, (err, result) => {
+                if (err) {
+                    console.log(`ERROR: ${normalizedSqlQuery}`);
+                    reject(err);
+                }
+                console.log(`record inserted: ${normalizedSqlQuery}`);
+                resolve(true)
+            })
         })
     }
 }

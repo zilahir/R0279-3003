@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS R0279_3003;
+CREATE DATABASE IF NOT EXISTS R0279_3003;
+
 USE R0279_3003
 
 DROP TABLE IF EXISTS departments,
@@ -8,7 +11,7 @@ DROP TABLE IF EXISTS departments,
                      salaries;
 
 CREATE TABLE departments (
-    dept_no VARCHAR (4)  NOT NULL AUTO_INCREMENT,
+    dept_no VARCHAR (4)  NOT NULL,
     dept_name VARCHAR (30)  NOT NULL,
     CONSTRAINT pk_departments PRIMARY KEY (
         dept_no
@@ -49,7 +52,7 @@ CREATE TABLE dept_manager (
 
 CREATE TABLE salaries (
     emp_no VARCHAR (36)  NOT NULL,
-    salary INT  NOT NULL,
+    salary FLOAT  NOT NULL,
     from_date DATE   NOT NULL,
     to_date DATE   NOT NULL,
     CONSTRAINT pk_salaries PRIMARY KEY (

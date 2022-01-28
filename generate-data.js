@@ -1,6 +1,24 @@
 import faker from 'faker';
 import random from 'random';
 import fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+
+const tables = {
+    employees: [
+        { name: 'emp_no', randomFunction: uuidv4() },
+        { name: 'birth_data', randomFunction: faker.date.past },
+        { name: 'fist_name', randomFunction: faker.name.firstName },
+        { name: 'last_name', randomFunction: faker.name.lastName },
+        { name: 'gender', randomFunction: faker.name.gender },
+        { name: 'hire_date', randomFunction: faker.date.past },
+    ] 
+}
+
+const objectSchemas = {
+    'employees': Object.assign({}, ...tables.employees.map(field => ({
+        [field.name]: '',
+    })))
+}
 
 const randomColumns = {
     randomData: [
@@ -10,6 +28,7 @@ const randomColumns = {
         { name: 'jobTitle', randomFunction: faker.name.jobTitle },
         { name: 'birth_date', randomFunction: faker.date.past },
         { name: 'gender', randomFunction: faker.name.gender },
+        { name: 'salaries', randomFunction: faker.finance.amount },
     ]
 }
 
@@ -23,17 +42,24 @@ function generate(randFunc, limit, name) {
 }
 
 function generateRandomData() {
-    const randomNumber = random.int(0, 99);
-    let randomData = {}
-    Object.keys(randomColumns.randomData).map(key => {
-        const currentKey = randomColumns.randomData[key]
-        const name = currentKey.name
-        Object.assign(randomData, {[name]: generate(currentKey.randomFunction, randomNumber, name)})
-        return true
+    return new Promise((resolve) => {
+        const randomNumber = random.int(10, 99);
+        let randomData = {}
+        Object.keys(tables).map(key => {
+            const thisKey = tables[key]
+            if (Array.isArray(thisKey)) {
+                Array.from({ length: randomNumber }).fill().map(() => {
+                    console.log(objectSchemas[key])
+                });
+            }
+        })
+        // return randomData
+        writeJsonFiles(randomData);
+        // console.log('randomData', randomData);
+        resolve({
+            dataKeys: Object.keys(randomData).map(key => key)
+        })
     })
-    // return randomData
-    writeJsonFiles(randomData);
-    // console.log('randomData', randomData);
 }
 
 function writeJsonFiles(data) {

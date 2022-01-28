@@ -1,7 +1,8 @@
 import generateRandomDepartments from './generate-data.js';
 
 function run() {
-    generateRandomDepartments()
+    const randomKeys = generateRandomDepartments()
+    // console.log(randomKeys)
 }
 
 run();

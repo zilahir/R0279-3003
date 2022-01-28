@@ -4,7 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
+    "docker:down": "docker-compose down -v",
+    "docker:up": "docker-compose up -d",
+    "clean:random": "rimraf ./data/*.json",
+    "start": " npm run clean:random && node main.js",
     "create-database": "sh ./setup.sh"
   },
   "type": "module",
@@ -20,6 +23,7 @@
   "homepage": "https://github.com/zilahir/R0279-3003#readme",
   "dependencies": {
     "faker": "^5.5.3",
-    "random": "^3.0.6"
+    "random": "^3.0.6",
+    "rimraf": "^3.0.2"
   }
 }

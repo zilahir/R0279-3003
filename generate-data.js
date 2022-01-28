@@ -1,12 +1,15 @@
 import faker from 'faker';
 import random from 'random';
+import fs from 'fs';
 
 const randomColumns = {
     randomData: [
         { name: 'department', randomFunction: faker.commerce.department },
         { name: 'firstName', randomFunction: faker.name.firstName },
         { name: 'lastName', randomFunction: faker.name.lastName },
-        { name: 'jobTitle', randomFunction: faker.name.jobTitle }
+        { name: 'jobTitle', randomFunction: faker.name.jobTitle },
+        { name: 'birth_date', randomFunction: faker.date.past },
+        { name: 'gender', randomFunction: faker.name.gender },
     ]
 }
 
@@ -28,7 +31,17 @@ function generateRandomData() {
         Object.assign(randomData, {[name]: generate(currentKey.randomFunction, randomNumber, name)})
         return true
     })
-    console.log('randomData', randomData);
+    // return randomData
+    writeJsonFiles(randomData);
+    // console.log('randomData', randomData);
+}
+
+function writeJsonFiles(data) {
+    Object.keys(data).map(key => {
+        fs.writeFileSync(`./data/${key}.json`, JSON.stringify({
+            rawData: data[key]
+        }));
+    });
 }
 
 export default generateRandomData;

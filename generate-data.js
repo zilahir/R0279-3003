@@ -73,7 +73,6 @@ function generateRandomData() {
                 Array.from({ length: randomNumber }).fill().map((_, index) => {
                     let thisRandomObject = {}
                     Object.assign({}, thisKey.forEach((field) => {
-                        console.log('typeof', typeof field.randomFunction)
                         thisRandomObject[field.name] = !!field.randomFunction ? field.randomFunction() : randomIds[field.name][index]
                     }))
                     randomData.push(Object.assign(thisRandomObject));

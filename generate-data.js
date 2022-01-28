@@ -5,14 +5,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 const getRandomSalary = () => random.int(2200, 7500);
 
+const getPastDate = () => new Date(faker.date.past()).getTime()
+const getFutureDate = () => new Date(faker.date.future()).getTime()
+
 const tables = {
     employees: [
         { name: 'emp_no', randomFunction: undefined },
-        { name: 'birth_data', randomFunction: faker.date.past },
+        { name: 'birth_data', randomFunction: getPastDate },
         { name: 'fist_name', randomFunction: faker.name.firstName },
         { name: 'last_name', randomFunction: faker.name.lastName },
         { name: 'gender', randomFunction: faker.name.gender },
-        { name: 'hire_date', randomFunction: faker.date.past },
+        { name: 'hire_date', randomFunction: getPastDate },
     ],
     departments: [
         { name: 'dept_no', randomFunction: undefined },
@@ -21,26 +24,26 @@ const tables = {
     dept_emp: [
         { name: 'emp_no', randomFunction: undefined },
         { name: 'dept_no', randomFunction: undefined },
-        { name: 'from_data', randomFunction: faker.date.past },
-        { name: 'to_date', randomFunction: faker.date.future },
+        { name: 'from_date', randomFunction: getPastDate },
+        { name: 'to_date', randomFunction: getFutureDate },
     ],
     dept_manager: [
         { name: 'emp_no', randomFunction: undefined },
         { name: 'dept_no', randomFunction: undefined },
-        { name: 'from_data', randomFunction: faker.date.past },
-        { name: 'to_date', randomFunction: faker.date.future },
+        { name: 'from_date', randomFunction: getPastDate },
+        { name: 'to_date', randomFunction: getFutureDate },
     ],
     titles: [
         { name: 'emp_no', randomFunction: undefined },
         { name: 'title', randomFunction: faker.name.jobTitle },
-        { name: 'from_data', randomFunction: faker.date.past },
-        { name: 'to_date', randomFunction: faker.date.future },
+        { name: 'from_date', randomFunction: getPastDate },
+        { name: 'to_date', randomFunction: getFutureDate },
     ],
     salaries: [
         { name: 'emp_no', randomFunction: undefined },
         { name: 'salary', randomFunction: getRandomSalary},
-        { name: 'from_data', randomFunction: faker.date.past },
-        { name: 'to_date', randomFunction: faker.date.future },
+        { name: 'from_date', randomFunction: getPastDate },
+        { name: 'to_date', randomFunction: getFutureDate },
     ]
 };
 

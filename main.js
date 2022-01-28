@@ -1,8 +1,10 @@
 import generateRandomDepartments from './generate-data.js';
+import insertRandomData from './insert-data.js'
 
-function run() {
-    const randomKeys = generateRandomDepartments()
-    // console.log(randomKeys)
+async function run() {
+    const randomKeys = await generateRandomDepartments();
+    console.log(randomKeys);
+    await insertRandomData();
 }
 
 run();

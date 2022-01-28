@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS departments,
                      salaries;
 
 CREATE TABLE departments (
-    dept_no VARCHAR (4)  NOT NULL,
+    dept_no VARCHAR (36)  NOT NULL,
     dept_name VARCHAR (30)  NOT NULL,
     CONSTRAINT pk_departments PRIMARY KEY (
         dept_no
@@ -32,19 +32,19 @@ CREATE TABLE employees (
 
 CREATE TABLE dept_emp (
     emp_no VARCHAR (36)  NOT NULL,
-    dept_no VARCHAR (4)  NOT NULL,
-    from_date DATE   NOT NULL,
-    to_date DATE   NOT NULL,
+    dept_no VARCHAR (36)  NOT NULL,
+    from_date BIGINT   NOT NULL,
+    to_date BIGINT   NOT NULL,
     CONSTRAINT pk_dept_emp PRIMARY KEY (
         emp_no, dept_no
      )
 );
 
 CREATE TABLE dept_manager (
-    dept_no VARCHAR (4)  NOT NULL,
+    dept_no VARCHAR (36)  NOT NULL,
     emp_no VARCHAR (36)  NOT NULL,
-    from_date DATE   NOT NULL,
-    to_date DATE   NOT NULL,
+    from_date BIGINT   NOT NULL,
+    to_date BIGINT   NOT NULL,
     CONSTRAINT pk_dept_manager PRIMARY KEY (
         dept_no, emp_no
      )
@@ -53,8 +53,8 @@ CREATE TABLE dept_manager (
 CREATE TABLE salaries (
     emp_no VARCHAR (36)  NOT NULL,
     salary FLOAT  NOT NULL,
-    from_date DATE   NOT NULL,
-    to_date DATE   NOT NULL,
+    from_date BIGINT   NOT NULL,
+    to_date BIGINT   NOT NULL,
     CONSTRAINT pk_salaries PRIMARY KEY (
         emp_no
      )
@@ -63,8 +63,8 @@ CREATE TABLE salaries (
 CREATE TABLE titles (
     emp_no VARCHAR (36)  NOT NULL,
     title VARCHAR (50)  NOT NULL,
-    from_date DATE   NOT NULL,
-    to_date DATE   NOT NULL
+    from_date BIGINT   NOT NULL,
+    to_date BIGINT   NOT NULL
 );
 
 

@@ -2,10 +2,12 @@
   "name": "sql_assignment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start": "node main.js",
     "create-database": "sh ./setup.sh"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zilahir/R0279-3003.git"
@@ -15,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/zilahir/R0279-3003/issues"
   },
-  "homepage": "https://github.com/zilahir/R0279-3003#readme"
+  "homepage": "https://github.com/zilahir/R0279-3003#readme",
+  "dependencies": {
+    "faker": "^5.5.3",
+    "random": "^3.0.6"
+  }
 }

@@ -5,20 +5,21 @@ import { v4 as uuidv4 } from 'uuid';
 
 const tables = {
     employees: [
-        { name: 'emp_no', randomFunction: uuidv4 },
+        // { name: 'emp_no', randomFunction: uuidv4 },
         { name: 'birth_data', randomFunction: faker.date.past },
         { name: 'fist_name', randomFunction: faker.name.firstName },
         { name: 'last_name', randomFunction: faker.name.lastName },
         { name: 'gender', randomFunction: faker.name.gender },
         { name: 'hire_date', randomFunction: faker.date.past },
-    ] 
+    ],
+    departments: [
+        { name: 'dept_no', randomFunction: uuidv4 },
+        { name: 'dept_name', randomFunction: faker.commerce.department },
+    ],
+    
 }
 
-const objectSchemas = {
-    'employees': Object.assign({}, ...tables.employees.map(field => ({
-        [field.name]: '',
-    })))
-}
+const generateRandomUserIds = (length) => Array.from({length}).map(() => uuidv4());
 
 const randomColumns = {
     randomData: [
@@ -32,31 +33,24 @@ const randomColumns = {
     ]
 }
 
-function generate(randFunc, limit, name) {
-    console.log(`creating random data data for column: ${name}`)
-    const data = []
-    for (let i = 0; i < limit; i++) {
-        data.push(randFunc())
-    }
-    return data
-}
-
 function generateRandomData() {
     return new Promise((resolve) => {
         const randomNumber = 2 // random.int(10, 99);
-        let randomData = []
+        const randomUserIds = generateRandomUserIds(randomNumber);
         Object.keys(tables).map(key => {
             const thisKey = tables[key]
+            let randomData = []
+            console.log('thisKey', thisKey);
             if (Array.isArray(thisKey)) {
-                Array.from({ length: randomNumber }).fill().map(() => {
+                Array.from({ length: randomNumber }).fill().map((_, index) => {
                     let thisRandomObject = {}
                     Object.assign({}, thisKey.forEach((field) => {
                         thisRandomObject[field.name] = field.randomFunction()
                     }))
-                    randomData.push(thisRandomObject);
+                    randomData.push(Object.assign(thisRandomObject, {emp_no: randomUserIds[index] }));
                 });
-                writeJsonFiles(randomData, key);
             }
+            writeJsonFiles(randomData, key);
         })
         resolve(true)
     })

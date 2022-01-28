@@ -49,12 +49,13 @@ function generateRandomData() {
             const thisKey = tables[key]
             if (Array.isArray(thisKey)) {
                 Array.from({ length: randomNumber }).fill().map(() => {
-                    randomData.push([...thisKey.map((field) => ({ // this is still not ok 
-                        [field.name]: field.randomFunction()
-                    }))])
+                    let thisRandomObject = {}
+                    Object.assign({}, thisKey.forEach((field) => {
+                        thisRandomObject[field.name] = field.randomFunction()
+                    }))
+                    randomData.push(thisRandomObject);
                 });
-                console.log(randomData)
-                // writeJsonFiles(randomData, key);
+                writeJsonFiles(randomData, key);
             }
         })
         resolve(true)
@@ -63,7 +64,7 @@ function generateRandomData() {
 
 function writeJsonFiles(data, key) {
     fs.writeFileSync(`./data/${key}.json`, JSON.stringify({
-        rawData: data
+        [key]: data
     }));
 }
 

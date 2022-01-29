@@ -65,13 +65,19 @@ CREATE TABLE titles (
     emp_no VARCHAR (36)  NOT NULL,
     title VARCHAR (50)  NOT NULL,
     from_date BIGINT   NOT NULL,
-    to_date BIGINT   NOT NULL
+    to_date BIGINT   NOT NULL,
+    CONSTRAINT pk_titles PRIMARY KEY (
+        emp_no
+    )
 );
 
 CREATE TABLE days_off (
     emp_no VARCHAR (36)  NOT NULL,
     from_date DATE   NOT NULL,
-    to_date DATE   NOT NULL
+    to_date DATE   NOT NULL,
+    CONSTRAINT pk_days_off PRIMARY KEY (
+        emp_no
+    )
 );
 
 

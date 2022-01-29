@@ -1,4 +1,6 @@
 import mysql from 'mysql';
+import chalk from 'chalk';
+import log from './log.js';
 
 export class MySql {
     constructor({host, username, password}) {
@@ -35,7 +37,7 @@ export class MySql {
                     console.log(`ERROR: ${normalizedSqlQuery}`);
                     reject(err);
                 }
-                console.log(`record inserted: ${normalizedSqlQuery}`);
+                log(chalk.green(`✅ Record inserted for table ${tableName}`))
                 resolve(true)
             })
         })

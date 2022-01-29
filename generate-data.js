@@ -2,6 +2,8 @@ import faker from 'faker';
 import random from 'random';
 import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
+import chalk from 'chalk';
+import log from './log.js';
 
 const getRandomSalary = () => random.int(2200, 7500);
 
@@ -47,18 +49,10 @@ const tables = {
     ]
 };
 
-/* export const objectSchemas = {
-    'employees': Object.assign({}, ...tables.employees.map(field => ({
-        [field.name]: '',
-    }))),
-    'departments': Object.assign({}, ...tables.departments.map(field))
-} */
-
-// console.log(objectSchemas)
-
 const generateRandomUuids = (length) => Array.from({length}).map(() => uuidv4());
 
 function generateRandomData() {
+    log(chalk.yellow('Starting generating random data'));
     return new Promise((resolve) => {
         const randomNumber = 2 // random.int(10, 99);
         const randomUserIds = generateRandomUuids(randomNumber);
@@ -70,6 +64,7 @@ function generateRandomData() {
         }
         Object.keys(tables).map(key => {
             const thisKey = tables[key]
+            log(chalk.yellow(`Generating random data for: ${key}`));
             let randomData = []
 
             if (Array.isArray(thisKey)) {
@@ -80,8 +75,11 @@ function generateRandomData() {
                     }))
                     randomData.push(Object.assign(thisRandomObject));
                 });
+                log(chalk.green(`✅ Generating random data for: ${key} is done!`));
             }
+            log(chalk.yellow(`Writing random data into file: ${key}.json`));
             writeJsonFiles(randomData, key);
+            log(chalk.green(`✅ Writing random data into file: ${key}.json is done!`));
         })
         resolve(Object.keys(tables).map(col => col));
     })

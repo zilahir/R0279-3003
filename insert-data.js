@@ -1,5 +1,7 @@
 import { readFileSync } from 'fs';
 import { MySql } from './mysql.js';
+import chalk from 'chalk';
+import log from './log.js';
 
 async function insertRandomData(dbTables) {
     return new Promise(function(resolve, reject) {
@@ -20,6 +22,7 @@ async function insertRandomData(dbTables) {
                     if (Array.isArray(jsonObject[dataKey])) {
                         
                             jsonObject[dataKey].map(dataRecord => {
+                                log(chalk.yellow(`Inserting data into table ${dataKey}`));
                                 promiseArray.push(DatabaseController.insertIntoDatabase(dataKey, dataRecord))
                             }
                         )
@@ -30,7 +33,7 @@ async function insertRandomData(dbTables) {
                 }
             })
             Promise.all(promiseArray).then(() => {
-                console.log('done')
+                log(chalk.green(`✅ Inserting data into database is done`));
             }).then(() => {
                 DatabaseController.cloeConnection()
                 resolve({

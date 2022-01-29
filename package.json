@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/zilahir/R0279-3003#readme",
   "dependencies": {
+    "chalk": "^5.0.0",
     "faker": "^5.5.3",
     "globby": "^13.1.0",
     "mysql": "^2.18.1",

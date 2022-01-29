@@ -8,8 +8,7 @@ async function run() {
     const dbTables = await generateRandomData();
     log(chalk.green('All mock data is now ready'));
     log(chalk.yellow('Starting insering random data into the database'));
-    const isDone = await insertRandomData(dbTables);
-    log(chalk.yellow('Starting executing testcases'));
+    await insertRandomData(dbTables);
 }
 
 run();

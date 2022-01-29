@@ -6,6 +6,8 @@ import chalk from 'chalk';
 import { format } from 'date-fns'
 import log from './log.js';
 
+faker.locale = "en";
+
 const getRandomSalary = () => random.int(2200, 7500);
 
 const getPastDate = () => new Date(faker.date.past()).getTime()

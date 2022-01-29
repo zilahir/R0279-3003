@@ -20,9 +20,8 @@ async function insertRandomData(dbTables) {
                     const jsonObject = JSON.parse(rawJson);
         
                     if (Array.isArray(jsonObject[dataKey])) {
-                        
+                            log(chalk.yellow(`Inserting data into table ${dataKey}`));
                             jsonObject[dataKey].map(dataRecord => {
-                                log(chalk.yellow(`Inserting data into table ${dataKey}`));
                                 promiseArray.push(DatabaseController.insertIntoDatabase(dataKey, dataRecord))
                             }
                         )

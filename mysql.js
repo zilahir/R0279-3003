@@ -92,7 +92,7 @@ export class MySql {
     }
 
     getColumnData(data) {
-        return Object.keys(data).map((field) => `'${data[field]}'`).join(', ');
+        return Object.keys(data).map((field) => `"${data[field]}"`).join(", ");
     }
 
     cloeConnection() {

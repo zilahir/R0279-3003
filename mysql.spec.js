@@ -75,6 +75,14 @@ const queries = [
                 RIGHT JOIN days_off ON employees.emp_no = days_off.emp_no
                 ORDER BY employees.emp_no;`),
         condition: ``
+    },
+    {
+        name: 'INNER JOIN',
+        query: _.template(`SELECT employees.emp_no, days_off.emp_no
+                FROM employees
+                INNER JOIN days_off ON employees.emp_no = days_off.emp_no
+                ORDER BY employees.emp_no;`),
+        condition: ``
     }
 ]
 

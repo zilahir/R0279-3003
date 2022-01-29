@@ -18,6 +18,24 @@ The application solve all fo the following:
 3) inserting all the test data into their tables, using `node-mysql` interface.
 4) running all the testcases, which satisfies every requirements the cours has set.
 
+## Schema
+
+The database lies on the following schema:
+
+![Employees Schema](./tmp/images/schema.png)
+
+Notice the mark for the `rfc4122` which delcared as `VARCHAR` Data type, for every `*_no`. Since in the assignment it was given to have an idea for an application, so I kept in mind to help with different type of integration.
+
+I know in `MySQL` it's common to have the `ID` olumns to set an auto-incrementing INT column, however, for example if I want to connect the employees table to a 3rd party authentication solution (such as `AWS Cognito`) it would require an additional mapping table, which makes the database structure less scalable. So I've went using `UUID` everywhere, where some type of `ID` was needed.
+
+Storing date as `DATE` type also has it's own limitation, for example the format. 
+
+> MySQL retrieves and displays DATE values in ' YYYY-MM-DD ' format.
+
+The `DATETIME` is better, however that's also _formatted_ in the way that it's stored bith the Date and the Time formats, which makes it hard to get it formatted to different locales, without additional steps. When it comes to storing dates, I am using `UNIX` timestamp format, which is `BIGINT` data type in `MySQL`.
+
+However, to satisfy the requirements to have a `DATE` column, there is one in the `days_off` table. Still, `UNIX` timestamp would have been a better solution here too.
+
 ## Getting started
 
 ### Requirements

@@ -16,7 +16,23 @@ const requiredDataTypes = ['VARCHAR', 'INT', 'DATE', ...myOwnDataTypes]
 const queries = [
     {
         name: 'select from employees',
-        query: _.template('SELECT * FROM employees WHERE ${condition}')
+        query: _.template('SELECT * FROM employees WHERE ${condition}'),
+        condition: '"first_name" IS NOT NULL'
+    },
+    {
+        name: 'seelct from employees',
+        query: _.template('SELECT * FROM employees WHERE ${condition}'),
+        condition: `"birth_date" < 1611944874`
+    },
+    {
+        name: 'select from salaries where not null',
+        query: _.template('SELECT * FROM salaries WHERE ${condition}'),
+        condition: `"salary" > 1000`
+    },
+    {
+        name: 'select max salaries from salaries',
+        query: _.template('SELECT MAX(salary) FROM salaries WHERE ${condition}'),
+        condition: `"salary" IS NOT NULL`
     }
 ]
 
@@ -61,9 +77,10 @@ describe('10 different queries should be created', () => {
     queries.forEach(currentQuery => {
         test(currentQuery.name, async () => {
             const thisQuery = currentQuery.query({
-                condition: `"first_name" IS NOT NULL`
+                condition: currentQuery.condition
             })
-            console.debug('thisQuery', thisQuery);
+
+            console.log(thisQuery);
             return await expect(DatabaseController.query(thisQuery)).resolves.not.toBe([])
         })
     })

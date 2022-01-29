@@ -150,7 +150,7 @@ It's tieme to run the testcases.
 
 ### Testcases
 
-There are alltogether 1 test suite including 39 testcases implemented.
+There are alltogether 1 test suite including 39 testcases implemented. The testcases are implemented in the most widely known and used testing framework called `Jest`.
 
 Every testcase is to satisfy all the requirements which were set in this cours.
 

@@ -56,7 +56,22 @@ const queries = [
     },
     {
         name: 'HAVING',
-        query: _.template('SELECT emp_no, salary As totalSalary FROM salaries GROUP BY emp_no HAVING totalSalary > 1000')
+        query: _.template('SELECT emp_no, salary As totalSalary FROM salaries GROUP BY emp_no HAVING totalSalary > 1000'),
+        condition: ``
+    },
+    {
+        name: 'LEFT JOIN',
+        query: `SELECT employees.emp_no, salaries.emp_no
+                FROM employees
+                LEFT JOIN salaries ON employees.emp_no = employees.emp_no
+                ORDER BY employees.emp_no;`
+    },
+    {
+        name: 'RIGHT JOIN',
+        query: `SELECT employees.emp_no, days_off.emp_no
+                FROM employees
+                RIGHT JOIN days_off ON employees.emp_no = days_off.emp_no
+                ORDER BY employees.emp_no;`
     }
 ]
 

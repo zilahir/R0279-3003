@@ -33,6 +33,30 @@ const queries = [
         name: 'select max salaries from salaries',
         query: _.template('SELECT MAX(salary) FROM salaries WHERE ${condition}'),
         condition: `"salary" IS NOT NULL`
+    },
+    {
+        name: 'select AND',
+        query: _.template('SELECT * FROM employees WHERE ${condition}'),
+        condition: `("birth_date" < 1616028786882 AND "hire_date" < 1616028786882)`
+    },
+    {
+        name: 'select OR',
+        query: _.template('SELECT * FROM employees WHERE ${condition}'),
+        condition: `("birth_date" < 1616028786882 OR "hire_date" < 1616028786882)`
+    },
+    {
+        name: 'select AS',
+        query: _.template('SELECT salary As EMPLOYEE_SALARY FROM salaries WHERE ${condition}'),
+        condition: `"salary" > 10`
+    },
+    {
+        name: 'GROUP BY',
+        query: _.template('SELECT COUNT(emp_no), gender FROM employees GROUP BY gender'),
+        condition: ``
+    },
+    {
+        name: 'HAVING',
+        query: _.template('SELECT emp_no, salary As totalSalary FROM salaries GROUP BY emp_no HAVING totalSalary > 1000')
     }
 ]
 

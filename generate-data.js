@@ -10,7 +10,7 @@ const getRandomSalary = () => random.int(2200, 7500);
 const getPastDate = () => new Date(faker.date.past()).getTime()
 const getFutureDate = () => new Date(faker.date.future()).getTime()
 
-const tables = {
+export const tables = {
     employees: [
         { name: 'emp_no', randomFunction: undefined },
         { name: 'birth_date', randomFunction: getPastDate },

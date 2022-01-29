@@ -50,6 +50,7 @@ export class MySql {
                         this.connection.query(query(table), (err, results) => {
                             if (err) reject(err);
                             const finalResult = results.find(result => this.convertQueryResultToObject(result).DATA_TYPE.toLowerCase() === dataType.toLowerCase());
+                            // !! casting the result into a Boolean
                             resolve(!!finalResult);
                         })
                     })
@@ -59,6 +60,8 @@ export class MySql {
             Promise.all(promises).then(allPromiseResult => {
                 // check if the array contains false
                 console.log(dataType, 'allPromiseResult', allPromiseResult);
+                // if there's at least one True in the array, that means the testcase is Trurthy,
+                // we can resolve the entire function with a True
                 const hasTrue = allPromiseResult.some(result => result === true);
                 resolve(hasTrue);
             })

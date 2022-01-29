@@ -30,34 +30,37 @@ export class MySql {
         })
     }
 
+    convertQueryResultToObject(queryResult) {
+        return JSON.parse((JSON.stringify(queryResult)))
+    }
+
     checkIFDataTypeExistsOnTable(tables, dataType) {
         // looping through every table for the desired dataType
         // returning true if there's a match
+        const promises = []
+        return new Promise((resolve, reject) => {
+            const query = (thisTableName) => `SELECT COLUMN_NAME, DATA_TYPE
+            FROM information_schema.columns 
+            WHERE table_schema = '${this.databaseName}' 
+            AND table_name = '${thisTableName}';`;
 
-        let promises = []
-        const query = (thisTableName) => `SELECT COLUMN_NAME, DATA_TYPE as tpye
-        FROM information_schema.columns 
-        WHERE table_schema = '${this.databaseName}' 
-        AND table_name = '${thisTableName}';`;
-
-        tables.forEach(table => {
-            promises.push(
-                new Promise((resolve, reject) => {
-                    this.connection.query(query(table), (err, result) => {
-                        if (err) reject(err);
-                        console.debug('result', result)
-                        resolve({
-                            result
+            tables.forEach(table => {
+                promises.push(
+                    new Promise((resolve, reject) => {
+                        this.connection.query(query(table), (err, results) => {
+                            if (err) reject(err);
+                            const finalResult = results.find(result => this.convertQueryResultToObject(result).DATA_TYPE.toLowerCase() === dataType.toLowerCase());
+                            resolve(!!finalResult);
                         })
                     })
-                })
-            )
-        })
+                )
+            })
 
-        return new Promise((resolve, reject) => {
             Promise.all(promises).then(allPromiseResult => {
-                // console.debug('allPromiseResult', allPromiseResult);
-                resolve(true)
+                // check if the array contains false
+                console.log(dataType, 'allPromiseResult', allPromiseResult);
+                const hasTrue = allPromiseResult.some(result => result === true);
+                resolve(hasTrue);
             })
         })
     }

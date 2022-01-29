@@ -53,7 +53,7 @@ CREATE TABLE dept_manager (
 
 CREATE TABLE salaries (
     emp_no VARCHAR (36)  NOT NULL,
-    salary FLOAT  NOT NULL,
+    salary INT (11)  NOT NULL,
     from_date BIGINT   NOT NULL,
     to_date BIGINT   NOT NULL,
     CONSTRAINT pk_salaries PRIMARY KEY (

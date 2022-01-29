@@ -34,10 +34,8 @@ export class MySql {
         return new Promise((resolve, reject) => {
             this.connection.query(`SHOW TABLES LIKE '${table}';`, (err, result) => {
                 if (err) {
-                    console.debug('lofasz', err)
                     reject(false)
                 };
-                console.debug('kaka', result);
                 resolve(true)
             })
         })

@@ -3,12 +3,15 @@ import random from 'random';
 import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 import chalk from 'chalk';
+import { format } from 'date-fns'
 import log from './log.js';
 
 const getRandomSalary = () => random.int(2200, 7500);
 
 const getPastDate = () => new Date(faker.date.past()).getTime()
 const getFutureDate = () => new Date(faker.date.future()).getTime()
+
+const getDateType = () => format(new Date(faker.date.future()), 'yyyy-MM-dd')
 
 export const tables = {
     employees: [
@@ -46,6 +49,11 @@ export const tables = {
         { name: 'salary', randomFunction: getRandomSalary},
         { name: 'from_date', randomFunction: getPastDate },
         { name: 'to_date', randomFunction: getFutureDate },
+    ],
+    days_off: [
+        { name: 'emp_no', randomFunction: undefined },
+        { name: 'from_date', randomFunction: getDateType },
+        { name: 'to_date', randomFunction: getDateType },
     ]
 };
 

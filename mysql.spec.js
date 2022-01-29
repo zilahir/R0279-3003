@@ -6,7 +6,7 @@ const DatabaseController = new MySql({
     password: 'DemoPassword'
 })
 
-const requiredTables = ['employees', 'departments', 'dept_emp', 'dept_manager', 'titles', 'salaries'];
+const requiredTables = ['employees', 'departments', 'dept_emp', 'dept_manager', 'titles', 'salaries', 'days_off'];
 
 describe('connection to the database', () => {
     test('is successful', async () => {

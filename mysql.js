@@ -1,6 +1,4 @@
 import mysql from 'mysql';
-import chalk from 'chalk';
-import log from './log.js';
 
 export class MySql {
     constructor({host, username, password}) {
@@ -20,6 +18,17 @@ export class MySql {
         return Object.keys(data).join(', ');
     }
 
+    connectToDatabase() {
+        return new Promise((resolve, reject) => {
+            this.connection.connect((err) => {
+                if (err) {
+                    reject(false)
+                }
+                resolve(true)
+            })
+        })
+    }
+
     getColumnData(data) {
         return Object.keys(data).map((field) => `'${data[field]}'`).join(', ');
     }
@@ -30,14 +39,12 @@ export class MySql {
 
     insertIntoDatabase(tableName, data) {
         const normalizedSqlQuery = `INSERT INTO ${tableName} (${this.getColumnNamesFromData(data)}) VALUES (${this.getColumnData(data)});`;
-        // console.log(normalizedSqlQuery);
         return new Promise((resolve, reject) => {
             this.connection.query(normalizedSqlQuery, (err, result) => {
                 if (err) {
                     console.log(`ERROR: ${normalizedSqlQuery}`);
                     reject(err);
                 }
-                log(chalk.green(`✅ Record inserted for table ${tableName}`))
                 resolve(true)
             })
         })

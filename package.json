@@ -9,7 +9,8 @@
     "clean:random": "rimraf ./data/*.json",
     "start": "npm run clean:random && node main.js",
     "start:generate": "node main.js",
-    "create-database": "sh ./setup.sh"
+    "create-database": "sh ./setup.sh",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --verbose"
   },
   "type": "module",
   "repository": {
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/zilahir/R0279-3003#readme",
   "dependencies": {
+    "ansi-styles": "^5.2.0",
     "chalk": "^5.0.0",
     "faker": "^5.5.3",
     "globby": "^13.1.0",
@@ -30,5 +32,17 @@
     "random": "^3.0.6",
     "rimraf": "^3.0.2",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.4.6",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^27.4.7"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
   }
 }

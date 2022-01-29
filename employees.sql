@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS departments,
                      titles,
                      dept_emp,
                      dept_manager,
+                     days_off,
                      salaries;
 
 CREATE TABLE departments (
@@ -67,6 +68,12 @@ CREATE TABLE titles (
     to_date BIGINT   NOT NULL
 );
 
+CREATE TABLE days_off (
+    emp_no VARCHAR (36)  NOT NULL,
+    from_date DATE   NOT NULL,
+    to_date DATE   NOT NULL
+);
+
 
 
 ALTER TABLE dept_emp ADD CONSTRAINT fk_dept_emp_emp_no FOREIGN KEY(emp_no)
@@ -85,4 +92,7 @@ ALTER TABLE salaries ADD CONSTRAINT fk_salaries_emp_no FOREIGN KEY(emp_no)
 REFERENCES employees (emp_no);
 
 ALTER TABLE titles ADD CONSTRAINT fk_titles_emp_no FOREIGN KEY(emp_no)
+REFERENCES employees (emp_no);
+
+ALTER TABLE days_off ADD CONSTRAINT fk_days_off_emp_no FOREIGN KEY(emp_no)
 REFERENCES employees (emp_no);

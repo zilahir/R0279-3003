@@ -61,17 +61,20 @@ const queries = [
     },
     {
         name: 'LEFT JOIN',
-        query: `SELECT employees.emp_no, salaries.emp_no
+        query: _.template(`SELECT employees.emp_no, salaries.emp_no
                 FROM employees
                 LEFT JOIN salaries ON employees.emp_no = employees.emp_no
-                ORDER BY employees.emp_no;`
+                ORDER BY employees.emp_no;`),
+        condition: ``
+
     },
     {
         name: 'RIGHT JOIN',
-        query: `SELECT employees.emp_no, days_off.emp_no
+        query: _.template(`SELECT employees.emp_no, days_off.emp_no
                 FROM employees
                 RIGHT JOIN days_off ON employees.emp_no = days_off.emp_no
-                ORDER BY employees.emp_no;`
+                ORDER BY employees.emp_no;`),
+        condition: ``
     }
 ]
 
@@ -118,8 +121,6 @@ describe('10 different queries should be created', () => {
             const thisQuery = currentQuery.query({
                 condition: currentQuery.condition
             })
-
-            console.log(thisQuery);
             return await expect(DatabaseController.query(thisQuery)).resolves.not.toBe([])
         })
     })

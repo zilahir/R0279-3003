@@ -62,7 +62,7 @@ const generateRandomUuids = (length) => Array.from({length}).map(() => uuidv4())
 function generateRandomData() {
     log(chalk.yellow('Starting generating random data'));
     return new Promise((resolve) => {
-        const randomNumber = 2 // random.int(10, 99);
+        const randomNumber = random.int(99, 199);
         const randomUserIds = generateRandomUuids(randomNumber);
         const randomDepartmentIds = generateRandomUuids(randomNumber);
 

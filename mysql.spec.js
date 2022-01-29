@@ -1,4 +1,5 @@
 import { MySql } from './mysql.js'
+import _ from 'lodash'
 
 const DatabaseController = new MySql({
     host: '127.0.0.1',
@@ -11,6 +12,13 @@ const requiredTables = ['employees', 'departments', 'dept_emp', 'dept_manager', 
 const myOwnDataTypes = ['BIGINT'];
 
 const requiredDataTypes = ['VARCHAR', 'INT', 'DATE', ...myOwnDataTypes]
+
+const queries = [
+    {
+        name: 'select from employees',
+        query: _.template('SELECT * FROM employees WHERE ${condition}')
+    }
+]
 
 describe('connection to the database', () => {
     test('is successful', async () => {
@@ -45,6 +53,18 @@ describe('all tables has Primary Keys set', () => {
             const doesContainerPk = (columnsArray) => columnsArray.some((column) => column.TABLE_NAME === table)
             const queryResultArray = await DatabaseController.query(query);
             expect(doesContainerPk(queryResultArray)).toBe(true);
+        })
+    })
+})
+
+describe('10 different queries should be created', () => {
+    queries.forEach(currentQuery => {
+        test(currentQuery.name, async () => {
+            const thisQuery = currentQuery.query({
+                condition: `"first_name" IS NOT NULL`
+            })
+            console.debug('thisQuery', thisQuery);
+            return await expect(DatabaseController.query(thisQuery)).resolves.not.toBe([])
         })
     })
 })

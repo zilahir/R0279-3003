@@ -34,6 +34,21 @@ describe('required data types exists', () => {
     })
 })
 
+describe('all tables has Primary Keys set', () => {
+    requiredTables.forEach(table => {
+        test(`having Primary Key set for table: ${table}`, async () => {
+            const databaseName = DatabaseController.getDatabase();
+            const query = `SELECT TABLE_NAME, COLUMN_NAME
+            FROM INFORMATION_SCHEMA.key_column_usage 
+            WHERE table_schema = '${databaseName}' AND CONSTRAINT_NAME = 'PRIMARY' `
+
+            const doesContainerPk = (columnsArray) => columnsArray.some((column) => column.TABLE_NAME === table)
+            const queryResultArray = await DatabaseController.query(query);
+            expect(doesContainerPk(queryResultArray)).toBe(true);
+        })
+    })
+})
+
 afterAll(done => {
     DatabaseController.cloeConnection();
     done();

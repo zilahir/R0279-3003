@@ -5,12 +5,13 @@ export class MySql {
         this.host = host;
         this.username = username;
         this.password = password;
+        this.databaseName = 'R0279_3003'
 
         this.connection = mysql.createConnection({
             host: this.host,
             user: this.username,
             password: this.password,
-            database: 'R0279_3003'
+            database: this.databaseName,
         })
     }
 
@@ -29,8 +30,39 @@ export class MySql {
         })
     }
 
+    checkIFDataTypeExistsOnTable(tables, dataType) {
+        // looping through every table for the desired dataType
+        // returning true if there's a match
+
+        let promises = []
+        const query = (thisTableName) => `SELECT COLUMN_NAME, DATA_TYPE as tpye
+        FROM information_schema.columns 
+        WHERE table_schema = '${this.databaseName}' 
+        AND table_name = '${thisTableName}';`;
+
+        tables.forEach(table => {
+            promises.push(
+                new Promise((resolve, reject) => {
+                    this.connection.query(query(table), (err, result) => {
+                        if (err) reject(err);
+                        console.debug('result', result)
+                        resolve({
+                            result
+                        })
+                    })
+                })
+            )
+        })
+
+        return new Promise((resolve, reject) => {
+            Promise.all(promises).then(allPromiseResult => {
+                // console.debug('allPromiseResult', allPromiseResult);
+                resolve(true)
+            })
+        })
+    }
+
     queryForTable(table) {
-        console.debug('table', table);
         return new Promise((resolve, reject) => {
             this.connection.query(`SHOW TABLES LIKE '${table}';`, (err, result) => {
                 if (err) {

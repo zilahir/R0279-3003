@@ -34,7 +34,7 @@ Storing date as `DATE` type also has it's own limitation, for example the format
 
 The `DATETIME` is better, however that's also _formatted_ in the way that it's stored bith the Date and the Time formats, which makes it hard to get it formatted to different locales, without additional steps. When it comes to storing dates, I am using `UNIX` timestamp format, which is `BIGINT` data type in `MySQL`.
 
-However, to satisfy the requirements to have a `DATE` column, there is one in the `days_off` table. Still, `UNIX` timestamp would have been a better solution here too.
+However, to satisfy the requirements to have a `DATE` column, there is one in the `days_off` table. Still, `U@NIX` timestamp would have been a better solution here too.
 
 ## Getting starteds
 

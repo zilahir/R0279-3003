@@ -36,7 +36,7 @@ The `DATETIME` is better, however that's also _formatted_ in the way that it's s
 
 However, to satisfy the requirements to have a `DATE` column, there is one in the `days_off` table. Still, `UNIX` timestamp would have been a better solution here too.
 
-## Getting started
+## Getting starteds
 
 ### Requirements
 
@@ -201,3 +201,6 @@ npm run test
 
 The output of this script should be exactly the same as above. Once every testcase has passed, that means that every requirement has met in the assignment.
 
+# Self evalutation
+
+Every requirement is met whcih was set in the assignment. There's random data generation, and the schema as well the random data is also part of this repo. I'd give myself the maximum amount of points.s

@@ -2,7 +2,6 @@ version: '3.3'
 services:
   db:
     image: mysql:5.7
-    restart: always
     environment:
       MYSQL_DATABASE: 'R0279_3003'
       MYSQL_USER: 'user'
